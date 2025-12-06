@@ -1,0 +1,90 @@
+tickets = 0
+ticket = 0
+
+finance_history = []
+csdl_history = []
+
+while True:
+    print("\nChoose Option:")
+    print("1. Login")
+    print("2. View Ticket History")
+    print("3. Exit")
+
+    users = {  
+        "Student123": "1234",
+    }
+
+    choice = input("Enter your choice (1-3): ").strip()
+
+    if choice == "1":
+        username = input("Username (Student123): ").strip()
+        password = input("Password (1234): ").strip()
+
+        if username in users and users[username] == password:
+            print(f"\nLogin successful! Welcome, {username}.")
+        
+
+            while True:
+                print("\nChoose which ticket you want to get:")
+                print("1. Finance Department")
+                print("2. CSDL")
+                print("3. Logout")
+
+                ticket_choice = input("Enter your choice (1-3): ").strip()
+
+                if ticket_choice == "1":
+                    tickets += 1
+                    formatted_ticket = f"F-{tickets:03}"
+                    finance_history.append(formatted_ticket)
+
+                    print(f"Your Ticket: {formatted_ticket}")
+                    print("*** Proceed to Finance Department ***")
+
+                elif ticket_choice == "2":
+                    ticket += 1
+                    formatted_ticket = f"CSDL-{ticket:03}"
+                    csdl_history.append(formatted_ticket)
+
+                    print(f"Your Ticket: {formatted_ticket}")
+                    print("*** Proceed to CSDL ***")
+
+                elif ticket_choice == "3":
+                    print("\nLogging out of ticket menu...")
+                    break
+
+                else:
+                    print("\nInvalid option. Please try again.")
+                    continue
+
+              
+                while True:
+                    add_more = input("\nDo you want to add another ticket? (Yes/No): ").strip().lower()
+                    if add_more == "yes":
+                        break
+                    elif add_more == "no":
+                        break
+                    else:
+                        print("Invalid input. Please enter 'Yes' or 'No'.")
+
+        else:
+            print("\nInvalid username or password. Please try again.\n")
+
+    elif choice == "2": 
+        print("\n--- Ticket History ---")
+        
+        if not finance_history and not csdl_history:
+            print("No tickets have been issued yet.")
+        else:
+            print("------------------------------------------")
+            print("\nFinance Department Tickets:", finance_history)
+            print("CSDL Tickets:", csdl_history)
+            print(f"\nTotal Finance Tickets: {len(finance_history)}")
+            print(f"Total CSDL Tickets: {len(csdl_history)}")
+            print("------------------------------------------")
+
+    elif choice == "3":
+        print("\nExiting the system. Goodbye!")
+        break
+
+    else:
+        print("\nInvalid option. Please try again.")
